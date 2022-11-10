@@ -1,0 +1,14 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.zhgwu.shared_preferences_content_provider">
+
+    <permission
+        android:name="shared_preferences.permission.WRITE_DATA"
+        android:label="Read data"
+        android:protectionLevel="normal" />
+
+    <permission
+        android:name="shared_preferences.permission.READ_DATA"
+        android:label="Read data"
+        android:protectionLevel="normal"/>
+
+</manifest>
