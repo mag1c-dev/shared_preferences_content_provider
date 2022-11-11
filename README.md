@@ -1,6 +1,6 @@
 # shared_preferences_content_provider
 
-[![pub package](https://img.shields.io/pub/v/shared_preference_content_provider.svg)](https://pub.dev/packages/shared_preference_content_provider)
+[![pub package](https://img.shields.io/pub/v/shared_preferences_content_provider.svg)](https://pub.dev/packages/shared_preference_content_provider)
 
 Shared preference supporting Android content provider
 
