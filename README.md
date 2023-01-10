@@ -1,6 +1,6 @@
 # shared_preferences_content_provider
 
-[![pub package](https://img.shields.io/pub/v/shared_preference_content_provider.svg)](https://pub.dev/packages/shared_preference_content_provider)
+[![pub package](https://img.shields.io/pub/v/shared_preferences_content_provider.svg)](https://pub.dev/packages/shared_preference_content_provider)
 
 Shared preference supporting Android content provider
 
@@ -56,11 +56,11 @@ await SharedPreferencesContentProvider.init(
 ```
 
 ```dart
-// Set values
-await SharedPreferencesContentProvider.setBool('MY_BOOL_KEY', true);
-await SharedPreferencesContentProvider.setString('MY_STRING_KEY', 'STRING_VALUE');
-await SharedPreferencesContentProvider.setInt('MY_INT_KEY', 42);
-await SharedPreferencesContentProvider.setDouble('MY_DOUBLE_KEY', 9.9);
+// Put values
+await SharedPreferencesContentProvider.putBool('MY_BOOL_KEY', true);
+await SharedPreferencesContentProvider.putString('MY_STRING_KEY', 'STRING_VALUE');
+await SharedPreferencesContentProvider.putInt('MY_INT_KEY', 42);
+await SharedPreferencesContentProvider.putDouble('MY_DOUBLE_KEY', 9.9);
 ```
 
 ```dart
