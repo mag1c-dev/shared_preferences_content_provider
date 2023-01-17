@@ -1,6 +1,6 @@
 name: shared_preferences_content_provider
 description: A Flutter package support share data between multiple application via content provider.
-version: 0.0.1
+version: 0.0.3
 homepage: https://github.com/zhgwu/shared_preferences_content_provider
 
 environment:

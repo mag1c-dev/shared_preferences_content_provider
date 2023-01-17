@@ -7,6 +7,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -23,6 +24,7 @@ public class SharedPreferencesContentProviderPlugin implements FlutterPlugin, Me
     private MethodChannel channel;
     private Context context;
     private String authority;
+    private static final String TAG = "SharedPrefCPPlugin";
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -41,44 +43,56 @@ public class SharedPreferencesContentProviderPlugin implements FlutterPlugin, Me
         switch (call.method) {
             case INIT_METHOD : {
                 authority = call.argument("authority");
+                result.success("INIT SUCCESS");
+                Log.d(TAG, "INIT SUCCESS");
                 break;
             }
             case GET_METHOD : {
                 result.success(get(call.argument("key")));
+                Log.d(TAG, "GET SUCCESS");
                 break;
             }
             case PUT_STRING_METHOD : {
                 putString(call.argument("key"), call.argument("value"));
                 result.success("PUT STRING SUCCESS");
+                Log.d(TAG, "PUT SUCCESS");
+
                 break;
             }
             case PUT_DOUBLE_METHOD : {
                 putDouble(call.argument("key"), call.argument("value"));
                 result.success("PUT DOUBLE SUCCESS");
+                Log.d(TAG, "PUT SUCCESS");
+
                 break;
             }
             case PUT_BOOL_METHOD : {
                 putBool(call.argument("key"), call.argument("value"));
                 result.success("PUT BOOL SUCCESS");
+                Log.d(TAG, "PUT SUCCESS");
                 break;
             }
             case PUT_INT_METHOD : {
                 putInt(call.argument("key"), call.argument("value"));
                 result.success("PUT INT SUCCESS");
+                Log.d(TAG, "PUT SUCCESS");
                 break;
             }
             case GET_ALL_METHOD : {
                 result.success(getAll());
+                Log.d(TAG, "GET ALL SUCCESS");
                 break;
             }
             case REMOVE_METHOD : {
                 call(REMOVE_METHOD, null, null);
                 result.success("REMOVE SUCCESS");
+                Log.d(TAG, "REMOVE SUCCESS");
                 break;
             }
             case REMOVE_ALL_METHOD : {
                 call(REMOVE_ALL_METHOD, null, null);
                 result.success("REMOVE ALL SUCCESS");
+                Log.d(TAG, "REMOVE ALL SUCCESS");
                 break;
             }
         }

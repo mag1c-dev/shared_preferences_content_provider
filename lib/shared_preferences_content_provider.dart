@@ -8,8 +8,8 @@ class SharedPreferencesContentProvider {
 
   /// Set Content provider URI and Authority
   ///
-  static Future<void> init({String? providerAuthority}) async {
-    await _channel.invokeMethod('init', {'authority': providerAuthority});
+  static Future<dynamic> init({String? providerAuthority}) {
+    return _channel.invokeMethod('init', {'authority': providerAuthority});
   }
 
   /// Saves a boolean [value] to persistent storage under the specified content provider.
