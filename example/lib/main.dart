@@ -24,6 +24,9 @@ class _MyAppState extends State<MyApp> {
       providerAuthority:
           'com.zhgwu.shared_preferences_content_provider.example',
     );
+    SharedPreferencesContentProvider.listen((event) {
+      print(event);
+    }, key: '123');
   }
 
   @override

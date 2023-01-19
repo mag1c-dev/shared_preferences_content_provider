@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
@@ -5,6 +6,25 @@ import 'package:flutter/services.dart';
 class SharedPreferencesContentProvider {
   static const MethodChannel _channel =
       MethodChannel('shared_preferences_content_provider');
+
+  static const _eventChannel =
+      EventChannel('shared_preferences_content_provider_event');
+
+  /// Listen value change
+  /// If provide [key], only receive notify when value of [key] change
+  ///
+  static StreamSubscription<dynamic> listen(
+      void Function(dynamic event)? onData,
+      {String? key,
+      Function? onError,
+      void Function()? onDone,
+      bool? cancelOnError}) {
+    return _eventChannel
+        .receiveBroadcastStream(key)
+        .map((event) => event)
+        .listen(onData,
+            onError: onError, cancelOnError: cancelOnError, onDone: onDone);
+  }
 
   /// Set Content provider URI and Authority
   ///

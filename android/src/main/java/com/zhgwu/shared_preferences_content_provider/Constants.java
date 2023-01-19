@@ -11,4 +11,5 @@ public class Constants {
     public static final String GET_ALL_METHOD = "getAll";
     public static final String REMOVE_METHOD = "remove";
     public static final String REMOVE_ALL_METHOD = "removeAll";
+    public static final String ACTION_DATA_UPDATE = "com.zhgwu.shared_preferences_content_provider.action_data_update";
 }

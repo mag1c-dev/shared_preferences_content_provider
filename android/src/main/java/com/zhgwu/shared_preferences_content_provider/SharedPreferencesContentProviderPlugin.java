@@ -2,8 +2,11 @@ package com.zhgwu.shared_preferences_content_provider;
 
 import static com.zhgwu.shared_preferences_content_provider.Constants.*;
 
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,7 +14,12 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import java.util.EventListener;
+import java.util.HashMap;
+import java.util.Map;
+
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
+import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -20,16 +28,21 @@ import io.flutter.plugin.common.MethodChannel.Result;
 /**
  * SharedPreferencesContentProviderPlugin
  */
-public class SharedPreferencesContentProviderPlugin implements FlutterPlugin, MethodCallHandler {
+public class SharedPreferencesContentProviderPlugin implements FlutterPlugin, MethodCallHandler, EventChannel.StreamHandler {
     private MethodChannel channel;
+    private EventChannel eChannel;
     private Context context;
     private String authority;
+    private BroadcastReceiver receiver;
+
     private static final String TAG = "SharedPrefCPPlugin";
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "shared_preferences_content_provider");
         channel.setMethodCallHandler(this);
+        eChannel = new EventChannel(flutterPluginBinding.getBinaryMessenger(), "shared_preferences_content_provider_event");
+        eChannel.setStreamHandler(this);
         context = flutterPluginBinding.getApplicationContext();
     }
 
@@ -132,7 +145,16 @@ public class SharedPreferencesContentProviderPlugin implements FlutterPlugin, Me
 
 
     private void put(String method, String key, Bundle bundle) {
+        if (receiver!=null){
+            Intent intent = new Intent();
+            intent.setAction(ACTION_DATA_UPDATE);
+            bundle.putString("key", key);
+            intent.putExtras(bundle);
+            context.sendBroadcast(intent);
+            Log.d(TAG, "SEND BROAD CAST SUCCESS");
+        }
         call(method, key, bundle);
+
     }
 
 
@@ -156,4 +178,36 @@ public class SharedPreferencesContentProviderPlugin implements FlutterPlugin, Me
         }
         return bundle;
     }
+
+    @Override
+    public void onListen(Object arguments, EventChannel.EventSink events) {
+        receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Map<String, Object> res = new HashMap<>();
+                res.put("key", intent.getExtras().get("key"));
+                res.put("value", intent.getExtras().get((String) intent.getExtras().get("key")));
+                if (arguments != null){
+                    if (arguments.equals(intent.getExtras().get("key"))){
+                        events.success(res);
+                        Log.d(TAG, "RECEIVER "+res);
+                    }
+                } else {
+                    events.success(res);
+                    Log.d(TAG, "RECEIVER "+res);
+                }
+
+            }
+        };
+        context.registerReceiver(receiver, new IntentFilter(ACTION_DATA_UPDATE));
+        Log.d(TAG, "LISTENING...");
+    }
+
+    @Override
+    public void onCancel(Object arguments) {
+        context.unregisterReceiver(receiver);
+        receiver = null;
+        Log.d(TAG, "STOP LISTEN");
+    }
+
 }

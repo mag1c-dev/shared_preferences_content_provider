@@ -72,3 +72,13 @@ double doubleValue = await SharedPreferencesContentProvider.get('MY_DOUBLE_KEY')
 ```
 
 
+```dart
+// Listen when value change
+SharedPreferencesContentProvider.listen((event) {
+    print(event);
+  }, 
+  key: '123', // If provide [key], only receive notify when value of [key] change
+);
+```
+
+
