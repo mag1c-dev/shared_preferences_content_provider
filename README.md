@@ -22,7 +22,7 @@ To use this plugin, add `shared_preferences_content_provider` as a [dependency i
     <application>
          <provider
            android:name="com.zhgwu.shared_preferences_content_provider.SharedPreferencesContentProvider"
-           android:authorities="com.zhgwu.shared_preferences_content_provider.example"
+           android:authorities="com.zhgwu.shared_preferences_content_provider_example"
            android:readPermission="shared_preferences.permission.READ_TOKEN"
            android:writePermission="shared_preferences.permission.WRITE_DATA"
            android:enabled="true"
@@ -41,8 +41,8 @@ To use this plugin, add `shared_preferences_content_provider` as a [dependency i
     <queries>
         <package android:name="com.zhgwu.shared_preferences_content_provider_example" />  <!--host app package-->
     </queries>
-    <uses-permission android:name="shared_preference.permission.WRITE_DATA" />
-    <uses-permission android:name="shared_preference.permission.READ_DATA" />
+    <uses-permission android:name="shared_preferences.permission.WRITE_DATA" />
+    <uses-permission android:name="shared_preferences.permission.READ_TOKEN" />
 </manifest>
 ```
 
@@ -51,7 +51,7 @@ To use this plugin, add `shared_preferences_content_provider` as a [dependency i
 // The content provider must be set up first
 await SharedPreferencesContentProvider.init(
     providerAuthority:
-    'com.zhgwu.shared_preferences_content_provider.example',  //authority provider in AndroidManifest.xml
+    'com.zhgwu.shared_preferences_content_provider_example',  //authority provider in AndroidManifest.xml
 );
 ```
 
@@ -70,7 +70,10 @@ String stringValue = await SharedPreferencesContentProvider.get('MY_STRING_KEY')
 int intValue = await SharedPreferencesContentProvider.get('MY_INT_KEY');
 double doubleValue = await SharedPreferencesContentProvider.get('MY_DOUBLE_KEY');
 ```
-
+or
+```dart
+final Map<String,dynamic> data = await SharedPreferencesContentProvider.getAll();
+```
 
 ```dart
 // Listen when value change
