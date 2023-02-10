@@ -167,7 +167,7 @@ public class SharedPreferencesContentProviderPlugin implements FlutterPlugin, Me
     }
 
     private Bundle call(String method, String arg, Bundle extras) {
-        Uri uri = Uri.parse(URI);
+        Uri uri = Uri.parse("content://" + authority);
         ContentResolver cr = context.getContentResolver();
         Bundle bundle;
 
