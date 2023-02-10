@@ -15,7 +15,7 @@
        <provider
            android:name="com.zhgwu.shared_preferences_content_provider.SharedPreferencesContentProvider"
            android:authorities="com.zhgwu.shared_preferences_content_provider.example"
-           android:readPermission="shared_preferences.permission.READ_TOKEN"
+           android:readPermission="shared_preferences.permission.READ_DATA"
 
            android:writePermission="shared_preferences.permission.WRITE_DATA"
            android:enabled="true"

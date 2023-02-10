@@ -12,6 +12,7 @@ class SharedPreferencesContentProvider {
 
   /// Listen value change
   /// If provide [key], only receive notify when value of [key] change
+  /// If [key] is null, all value change will notify
   ///
   static StreamSubscription<dynamic> listen(
       void Function(dynamic event)? onData,

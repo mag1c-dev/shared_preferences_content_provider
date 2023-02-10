@@ -23,7 +23,7 @@ To use this plugin, add `shared_preferences_content_provider` as a [dependency i
          <provider
            android:name="com.zhgwu.shared_preferences_content_provider.SharedPreferencesContentProvider"
            android:authorities="com.zhgwu.shared_preferences_content_provider_example"
-           android:readPermission="shared_preferences.permission.READ_TOKEN"
+           android:readPermission="shared_preferences.permission.READ_DATA"
            android:writePermission="shared_preferences.permission.WRITE_DATA"
            android:enabled="true"
            android:exported="true" />
@@ -42,7 +42,7 @@ To use this plugin, add `shared_preferences_content_provider` as a [dependency i
         <package android:name="com.zhgwu.shared_preferences_content_provider_example" />  <!--host app package-->
     </queries>
     <uses-permission android:name="shared_preferences.permission.WRITE_DATA" />
-    <uses-permission android:name="shared_preferences.permission.READ_TOKEN" />
+    <uses-permission android:name="shared_preferences.permission.READ_DATA" />
 </manifest>
 ```
 
@@ -65,10 +65,10 @@ await SharedPreferencesContentProvider.putDouble('MY_DOUBLE_KEY', 9.9);
 
 ```dart
 // Get values
-bool boolValue = await SharedPreferencesContentProvider.get('MY_BOOL_KEY');
-String stringValue = await SharedPreferencesContentProvider.get('MY_STRING_KEY');
-int intValue = await SharedPreferencesContentProvider.get('MY_INT_KEY');
-double doubleValue = await SharedPreferencesContentProvider.get('MY_DOUBLE_KEY');
+final bool boolValue = await SharedPreferencesContentProvider.get('MY_BOOL_KEY');
+final String stringValue = await SharedPreferencesContentProvider.get('MY_STRING_KEY');
+final int intValue = await SharedPreferencesContentProvider.get('MY_INT_KEY');
+final double doubleValue = await SharedPreferencesContentProvider.get('MY_DOUBLE_KEY');
 ```
 or
 ```dart
@@ -76,11 +76,11 @@ final Map<String,dynamic> data = await SharedPreferencesContentProvider.getAll()
 ```
 
 ```dart
-// Listen when value change
+// Listen when value change value of key ('123') change
 SharedPreferencesContentProvider.listen((event) {
     print(event);
   }, 
-  key: '123', // If provide [key], only receive notify when value of [key] change
+  key: '123', // If you want to listen when have any change, remove this
 );
 ```
 

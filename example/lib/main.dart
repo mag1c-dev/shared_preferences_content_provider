@@ -24,6 +24,7 @@ class _MyAppState extends State<MyApp> {
       providerAuthority:
           'com.zhgwu.shared_preferences_content_provider.example',
     );
+
     SharedPreferencesContentProvider.listen((event) {
       print(event);
     }, key: '123');
@@ -72,7 +73,7 @@ class _MyAppState extends State<MyApp> {
                         final res = await SharedPreferencesContentProvider.get(
                             keyController.text);
                         setState(() {
-                          notify = 'Key: ${valueController.text}, Value: $res';
+                          notify = 'Key: ${keyController.text}, Value: $res';
                         });
                       } else {
                         final res =
