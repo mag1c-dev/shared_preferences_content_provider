@@ -22,7 +22,7 @@ To use this plugin, add `shared_preferences_content_provider` as a [dependency i
     <application>
          <provider
            android:name="com.zhgwu.shared_preferences_content_provider.SharedPreferencesContentProvider"
-           android:authorities="com.zhgwu.shared_preferences_content_provider_example"
+           android:authorities="your_authority"
            android:readPermission="shared_preferences.permission.READ_DATA"
            android:writePermission="shared_preferences.permission.WRITE_DATA"
            android:enabled="true"
@@ -39,7 +39,7 @@ To use this plugin, add `shared_preferences_content_provider` as a [dependency i
 ```xml
 <manifest>
     <queries>
-        <package android:name="com.zhgwu.shared_preferences_content_provider_example" />  <!--host app package-->
+        <package android:name="com.example.host" />  <!--host app package-->
     </queries>
     <uses-permission android:name="shared_preferences.permission.WRITE_DATA" />
     <uses-permission android:name="shared_preferences.permission.READ_DATA" />
@@ -51,7 +51,7 @@ To use this plugin, add `shared_preferences_content_provider` as a [dependency i
 // The content provider must be set up first
 await SharedPreferencesContentProvider.init(
     providerAuthority:
-    'com.zhgwu.shared_preferences_content_provider_example',  //authority provider in AndroidManifest.xml
+    'your_authority',  //authority provider in AndroidManifest.xml of host app
 );
 ```
 
